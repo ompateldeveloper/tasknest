@@ -15,7 +15,7 @@ export default function TaskList() {
     const getTasks = async () => {
         setIsLoading(true)
 
-        await axios.get("/tasks/all", {
+        await axios.get("/api/tasks/all", {
             headers: {
                 Authorization: `Bearer ${user?.token}`,
             },

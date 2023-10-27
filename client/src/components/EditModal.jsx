@@ -20,7 +20,7 @@ export default function EditModal({ data, modal, setModal }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setIsLoading(true)
-        await axios.put(`/tasks/update/${data._id}`, formData, {
+        await axios.put(`/api/tasks/update/${data._id}`, formData, {
             headers: {
                 Authorization: `Bearer ${user?.token}`,
             },

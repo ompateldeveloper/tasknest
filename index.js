@@ -52,16 +52,16 @@ const adminMiddleware= async (req,res,next)=>{
     }
 }
 
-app.get("/users",adminMiddleware,async (req,res)=>{
+app.get("/api/users",adminMiddleware,async (req,res)=>{
     const users = await User.find({})
     res.json(users)
 })
 
 const userRoutes = require("./routes/UserRoutes")
-app.use('/auth',userRoutes)
+app.use('/api/auth',userRoutes)
 
 const taskRoutes = require("./routes/TaskRoutes")
-app.use('/tasks',requireAuth,taskRoutes)
+app.use('/api/tasks',requireAuth,taskRoutes)
 
 
 

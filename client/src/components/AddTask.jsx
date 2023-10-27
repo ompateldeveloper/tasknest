@@ -21,7 +21,7 @@ export default function AddTask() {
     const fetchUsers = async () => {
         if (!user) return
         try {
-            await axios.get("/users", {
+            await axios.get("/api/users", {
                 headers: {
                     Authorization: `Bearer ${user?.token}`,
                 },

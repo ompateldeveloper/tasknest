@@ -12,7 +12,7 @@ export default function Task({ data }) {
     const { tasks, setTasks ,layout,users} = useGlobalContext();
     const [modal, setModal] = useState(false);
     const handleDelete = async () => {
-        await axios.delete(`/tasks/delete/${data._id}`, {
+        await axios.delete(`/api/tasks/delete/${data._id}`, {
             headers: {
                 Authorization: `Bearer ${user?.token}`,
             },
