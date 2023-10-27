@@ -9,7 +9,7 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const socketInstance = io('/');
+    const socketInstance = io('/api');
     setSocket(socketInstance);
 
     return () => {

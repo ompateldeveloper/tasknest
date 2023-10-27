@@ -49,7 +49,7 @@ export default function AddTask() {
         setIsLoading(true)
         let body = users?{...formData,user:taskFor}:formData
 
-        await axios.post("/tasks/add", body, {
+        await axios.post("/api/tasks/add", body, {
             headers: {
                 Authorization: `Bearer ${user?.token}`,
             },

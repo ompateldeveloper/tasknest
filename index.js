@@ -97,8 +97,9 @@ const checkAdmin =async(id)=>{
     }
     return false
 }
+const apiNamespace = io.of('/api');
 
-io.on("connection",(socket)=>{
+apiNamespace.on("connection",(socket)=>{
 
     socket.on('joinRoom', async(token) => {
         const {id} = jwt.verify(token, process.env.ACCESS_TOKEN,{ algorithm: 'HS256' })
