@@ -14,7 +14,7 @@ function App() {
     async function verifyUser(){
         try {
 
-            const response = await axios.post('http://localhost:4000/auth/verify', {token: user?.token});
+            const response = await axios.post('/auth/verify', {token: user?.token});
             
             if (response.data.value) {
               setIsValid(true)

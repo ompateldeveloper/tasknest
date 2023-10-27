@@ -21,7 +21,7 @@ export default function AddTask() {
     const fetchUsers = async () => {
         if (!user) return
         try {
-            await axios.get("http://localhost:4000/users", {
+            await axios.get("/users", {
                 headers: {
                     Authorization: `Bearer ${user?.token}`,
                 },
@@ -49,7 +49,7 @@ export default function AddTask() {
         setIsLoading(true)
         let body = users?{...formData,user:taskFor}:formData
 
-        await axios.post("http://localhost:4000/tasks/add", body, {
+        await axios.post("/tasks/add", body, {
             headers: {
                 Authorization: `Bearer ${user?.token}`,
             },

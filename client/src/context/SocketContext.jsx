@@ -9,7 +9,7 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const socketInstance = io('http://localhost:4000/');
+    const socketInstance = io('/');
     setSocket(socketInstance);
 
     return () => {

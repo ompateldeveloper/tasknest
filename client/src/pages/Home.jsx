@@ -1,6 +1,5 @@
 import React from 'react'
 import { useAuthContext } from '../context/AuthContext'
-import { Link } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import TaskList from './TaskList';
 
