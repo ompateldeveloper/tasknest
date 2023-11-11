@@ -11,9 +11,15 @@ app.use(express.json())
 
 const requireAuth = require("./middleware/requireAuth")
 
-app.get('/',(req,res)=>{
-    res.send("server working")
-})
+const path = require('path');
+// app.use("/",express.static(path.join(__dirname, 'client', 'dist', 'assets')))
+// app.get('/',(req,res)=>{
+//     // res.render()
+//     res.sendFile(path.join(__dirname, './client/dist/index.html'));
+
+// })
+
+
 
 
 const User = require("./models/UserModel")
@@ -66,6 +72,11 @@ app.use('/api/tasks',requireAuth,taskRoutes)
 
 
 
+app.use(express.static(path.join(__dirname, 'client', 'dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 
 
 

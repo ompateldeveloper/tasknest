@@ -6,7 +6,7 @@ export default defineConfig({
   server:{
     proxy:{
       '/api':{
-        target:'https://tasknest-backend.onrender.com/',
+        target:'/',
         changeOrigin:true
       }
     }
