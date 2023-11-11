@@ -6,11 +6,12 @@ import Loading from '../components/Loading';
 import AddTask from '../components/AddTask';
 import { useGlobalContext } from '../context/GlobalContext';
 import { useSocket } from '../context/SocketContext';
+import { AnimatePresence } from 'framer-motion';
 
 export default function TaskList() {
     const [isLoading, setIsLoading] = useState(false);
     const { user } = useAuthContext()
-    const { filter, tasks,setTasks,layout } = useGlobalContext()
+    const { filter, tasks, setTasks, layout } = useGlobalContext()
     const socket = useSocket();
     const getTasks = async () => {
         setIsLoading(true)
@@ -31,7 +32,7 @@ export default function TaskList() {
     }
     useEffect(() => {
         getTasks()
-        
+
     }, [user])
 
     // useEffect(() => {
@@ -40,28 +41,40 @@ export default function TaskList() {
 
     return (
         <div className=' w-full'>
-            
-            <AddTask/>
-            <div className="task-list h-[calc(100vh-192px)] mt-2 overflow-auto justify-center " style={{display:layout?"grid":"block",gridTemplateColumns:"repeat(auto-fit,270px)",gridTemplateRows:"repeat(auto-fill,64px)"}}>
+
+            <AddTask />
+            <div className="task-list h-[calc(100vh-192px)] mt-2 overflow-auto justify-center " style={{ display: layout ? "grid" : "block", gridTemplateColumns: "repeat(auto-fit,270px)", gridTemplateRows: "repeat(auto-fill,64px)" }}>
                 {
-                        (tasks && tasks.length)
+
+                    (tasks && tasks.length)
                         ?
-                        tasks 
-                        .filter((task) => {
-                            const { priority, completed } = filter;
-                            if (priority && completed !== null) {
-                              return task.priority === priority && task.completed.toString() === completed;
-                            } else if (priority) {
-                              return task.priority === priority;
-                            } else if (completed !== null) {
-                              return task.completed.toString() === completed;
-                            } else {
-                              return true;
+                        <AnimatePresence>
+                            {
+                                tasks
+                                    .filter((task) => {
+                                        const { priority, completed } = filter;
+                                        if (priority && completed !== null) {
+                                            return task.priority === priority && task.completed.toString() === completed;
+                                        } else if (priority) {
+                                            return task.priority === priority;
+                                        } else if (completed !== null) {
+                                            return task.completed.toString() === completed;
+                                        } else {
+                                            return true;
+                                        }
+                                    })
+                                    .map((data) => (
+                                        <Task
+                                            data={data}
+                                            key={data._id}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                        />
+                                    )).reverse()
                             }
-                        })
-                        .map((data) => (
-                            <Task data={data} key={data._id} />
-                        )).reverse()
+                        </AnimatePresence>
+
                         :
                         (
                             <div className="div flex items-center justify-center h-full w-full ">

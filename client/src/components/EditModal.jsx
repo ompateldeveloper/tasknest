@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useAuthContext } from "../context/AuthContext";
 import { useGlobalContext } from "../context/GlobalContext";
 import { useSocket } from "../context/SocketContext";
-
+import { motion } from "framer-motion"
 export default function EditModal({ data, modal, setModal }) {
     const [isLoading, setIsLoading] = useState(false);
     const { user } = useAuthContext();
@@ -64,8 +64,9 @@ export default function EditModal({ data, modal, setModal }) {
         })
     },[socket,tasks])
     return (
-        <div className={`modal absolute h-full w-full left-0 top-0 bg-zinc-200 bg-opacity-30 flex items-center justify-center  ${modal ? "opacity-100 pointer-events-auto" : " opacity-0 pointer-events-none"}`}>
-            <form action="" className=' my-4 bg-white shadow-md shadow-zinc-300 rounded-md' onSubmit={handleSubmit}>
+        <motion.div  className={`modal absolute h-full w-full left-0 top-0 flex items-center justify-center  ${modal ? "opacity-100 pointer-events-auto" : " opacity-0 pointer-events-none"}`}>
+            <div className="absolute inset-0 z-0 bg-zinc-200 bg-opacity-40 " onClick={()=>setModal(false)}></div>
+            <form action="" className=' my-4 bg-white shadow-md shadow-zinc-300 rounded-md z-10' onSubmit={handleSubmit}>
                 <div className="flex items-center justify-between px-4 mt-2">
                     <div className="">Edit Task</div>
                     <div className="close w-min p-1 text-zinc-700 " onClick={() => { setModal(false) }}>
@@ -96,6 +97,7 @@ export default function EditModal({ data, modal, setModal }) {
                     <option value={true}> Completed</option>
                 </select>
             </form>
-        </div>
+        </motion.div>
+
     )
 }

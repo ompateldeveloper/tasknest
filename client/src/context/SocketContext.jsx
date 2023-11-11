@@ -9,7 +9,7 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const socketInstance = io('https://tasknest-backend.onrender.com/api');
+    const socketInstance = io('/api');
     setSocket(socketInstance);
 
     return () => {
