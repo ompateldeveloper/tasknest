@@ -36,6 +36,9 @@ function App() {
         <div className="App ">
 
             <Routes>
+                <Route path='*' element={
+                    <Navigate to="/" replace/>
+                } />
                 <Route path={"/"} element={
                     !user?
                     <Navigate to="/login" replace/>

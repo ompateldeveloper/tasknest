@@ -34,6 +34,8 @@ const registerUser = async (req,res) => {
         res.status(400).json({err:err.message})
     }
 }
+
+
 const verifyUser = async (req,res)=>{
     const {token} = req.body
     try {
